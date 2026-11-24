@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AMALIA-VL: A Native European Portuguese Open-Source Vision and Language Model</title>
+  <meta name="description" content="AMALIA-VL is the first open-source instruction-tuned Large Vision and Language Model built natively for European Portuguese (pt-PT).">
+  <meta property="og:title" content="AMALIA-VL: A Native European Portuguese Open-Source Vision and Language Model">
+  <meta property="og:description" content="The first open-source instruction-tuned LVLM built natively for European Portuguese (pt-PT).">
+  <meta property="og:image" content="static/img/amalia-vl/teaser.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="static/img/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="static/css/style.css">
+</head>
+<body>
+<!--ICONS--><svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<symbol id="i-gh" viewBox="0 0 16 16"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></symbol>
+<symbol id="i-paper" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></g></symbol>
+<symbol id="i-data" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></g></symbol>
+<symbol id="i-bench" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></g></symbol>
+</svg><!--/ICONS-->
+
+<header class="topbar">
+  <div class="container">
+    <a class="brand" href="https://amaliallm.pt" aria-label="AMALIA project website"><img src="static/img/amalia-logo.png" alt="AMALIA"></a>
+    <nav>
+      <a href="./" class="active">AMALIA-VL</a>
+      <a href="portexto/">PorTEXTO</a>
+      <a href="https://amaliallm.pt" class="ext">amaliallm.pt</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="container">
+      <h1><span class="accent">AMALIA-VL</span><span class="subtitle">A Native European Portuguese Open-Source Vision and Language Model</span></h1>
+
+      <p class="authors">
+        <span>Diogo Glória-Silva<sup>1,2</sup></span>
+        <span>João Cardeira<sup>1,2</sup></span>
+        <span>Manuel Letras da Luz<sup>1</sup></span>
+        <span>Afonso Simplício<sup>1,2</sup></span>
+        <span>Gonçalo Vinagre<sup>1,2</sup></span>
+        <span>Diogo Tavares<sup>1,2</sup></span>
+        <span>Rafael Ferreira<sup>1,2</sup></span>
+        <span>Inês Calvo<sup>1</sup></span>
+        <span>Inês Vieira<sup>1</sup></span>
+        <span>David Semedo<sup>1,2</sup></span>
+        <span>João Magalhães<sup>1,2</sup></span>
+      </p>
+      <p class="affils"><span><sup>1</sup> NOVA School of Science and Technology</span><span><sup>2</sup> NOVA LINCS</span></p>
+      <p class="contact">Correspondence: <a href="mailto:dmgc.silva@fct.unl.pt">dmgc.silva@fct.unl.pt</a></p>
+
+      <div class="buttons">
+        <a class="btn" href="https://arxiv.org/abs/2606.19100"><svg><use href="#i-paper"/></svg> Paper</a>
+        <a class="btn" href="https://github.com/AMALIA-LLM/amalia-vl-sft"><svg><use href="#i-gh"/></svg> Training Code</a>
+        <a class="btn" href="https://github.com/AMALIA-LLM/amalia-vl-eval"><svg><use href="#i-gh"/></svg> Eval Code</a>
+        <a class="btn" href="https://huggingface.co/collections/amalia-llm/amalia-vl-0626-6a425c5fe0f1a1866eb97b3b"><span class="emoji">🤗</span> Models</a>
+        <a class="btn" href="https://huggingface.co/datasets/amalia-llm/AMALIA-VL-SFT-Dataset"><svg><use href="#i-data"/></svg> Data</a>
+        <a class="btn" href="https://huggingface.co/collections/amalia-llm/amalia-vl-eval-69d7c3cc5b1993b10eed21b1"><svg><use href="#i-bench"/></svg> pt-PT Benchmarks</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="teaser">
+    <div class="container wide">
+      <figure style="margin:0">
+        <img src="static/img/amalia-vl/teaser.jpg" alt="Three image questions in European Portuguese answered by AMALIA-VL, Qwen3-VL-8B and Molmo2-8B.">
+        <figcaption><span class="label">Fig. 1.</span> AMALIA-VL is natively European Portuguese, grounding its answers in Portuguese visual culture, whereas general LVLMs hallucinate or fall back to Brazilian Portuguese.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ============ ABSTRACT ============ -->
+  <section id="abstract">
+    <div class="container">
+      <h2>Abstract</h2>
+      <p>Large Vision and Language Models (LVLMs) have advanced rapidly, yet European Portuguese (pt-PT) remains systematically underserved by existing open-source multimodal models, which either conflate it with Brazilian Portuguese or severely under-represent it in their training data mixes. We introduce <strong>AMALIA-VL</strong>, the first open-source instruction-tuned LVLM built natively for pt-PT, pairing a high-resolution vision encoder with dynamic image tiling and a fully open pt-PT-optimized language model via a learned connector. We contribute with a purposefully designed three-stage training process — vision-language alignment, general visual instruction tuning, and preference optimization — together with a pt-PT-centric multimodal data mix combining curated and translated public datasets with novel datasets that address the near-total absence of European Portuguese multimodal resources. Our evaluation shows that AMALIA-VL establishes a strong baseline for open-source pt-PT LVLMs. We release model weights, training data, and construction pipelines along with machine-translated pt-PT evaluation benchmarks to help democratize pt-PT LVLM development.</p>
+
+      <div class="highlights">
+        <div>
+          <img src="static/img/amalia-symbol.png" alt="">
+          <h3>Native pt-PT LVLM</h3>
+          <p>The first fully open native pt-PT LVLM, competitive with leading open-source LVLMs.</p>
+        </div>
+        <div>
+          <img src="static/img/amalia-symbol.png" alt="">
+          <h3>Three-stage training</h3>
+          <p>Adds vision capabilities while preserving the LLM's pt-PT proficiency and cultural knowledge.</p>
+        </div>
+        <div>
+          <img src="static/img/amalia-symbol.png" alt="">
+          <h3>pt-PT data mix</h3>
+          <p>4.7M samples, including 12 novel synthetic pt-PT datasets.</p>
+        </div>
+        <div>
+          <img src="static/img/amalia-symbol.png" alt="">
+          <h3>pt-PT benchmarks</h3>
+          <p>18 vision benchmarks machine-translated to pt-PT.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ METHOD ============ -->
+  <section id="method" class="alt">
+    <div class="container">
+      <h2>Model and Training</h2>
+      <p>Following LLaVA-NeXT, AMALIA-VL pairs a <strong>SigLIP2</strong> vision encoder with adaptive image tiling and the open pt-PT <strong>AMALIA</strong> LLM, via a two-layer MLP connector. Training progressively instils vision capabilities while minimizing text-only regression in pt-PT.</p>
+
+      <div class="stages">
+        <div>
+          <span class="n">Stage 1</span>
+          <h3>Vision-Language Alignment</h3>
+          <p>Connector warm-up on image captions, with encoder and LLM frozen.</p>
+          <span class="meta">0.5M samples · connector only</span>
+        </div>
+        <div>
+          <span class="n">Stage 2</span>
+          <h3>Visual Instruction Tuning</h3>
+          <p>Full model training on a highly diverse, pt-PT-centric instruction mix.</p>
+          <span class="meta">4.7M samples · ≈2B tokens · all parameters</span>
+        </div>
+        <div>
+          <span class="n">Stage 3</span>
+          <h3>Preference Optimization</h3>
+          <p>DPO on synthetic preference pairs from the Stage 2 mix, plus safety data.</p>
+          <span class="meta">0.3M samples · all parameters</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DATA ============ -->
+  <section id="data">
+    <div class="container">
+      <h2>pt-PT Multimodal Data</h2>
+      <div class="grid-2">
+        <div>
+          <p>European Portuguese multimodal resources are nearly absent. We combine open-license datasets, translated to pt-PT with TranslateGemma and Gemma3 to avoid <em>monolingual islands</em>, with <strong>12 novel synthetic datasets</strong> generated with open-source models over public-domain images.</p>
+          <ul class="syn">
+            <li><b>General VQA</b><span><em>PT-VQA-Gen</em>: native pt-PT questions with Chain-of-Thought answers, filtered for pt-BR, hallucinations and easy samples.</span></li>
+            <li><b>OCR &amp; documents</b><span><em>PT-OCR</em>, <em>PT-Render-Text</em>, <em>InvoiceQA</em>: pt-PT transcription in diverse output formats, field extraction and rejection of incorrect candidates.</span></li>
+            <li><b>Captioning</b><span><em>PT-Caps</em>, <em>PT-Caps-Fusion</em>: bilingual captions at three levels of detail, and fused captions from multiple LVLMs.</span></li>
+            <li><b>Charts &amp; code</b><span><em>InfographicSynth</em> and four code datasets (<em>SimpleCodeOCR</em>, <em>SePIC</em>, <em>PTOutputsToCode</em>, <em>PTSimpleCodeOutputs</em>): chart QA, code transcription and execution reasoning.</span></li>
+            <li><b>Culture</b><span><em>CaravelaSFT</em>: Portuguese heritage and gastronomy, from Wikipedia and the DGADR registry.</span></li>
+          </ul>
+        </div>
+        <div>
+          <div class="chart-head"><h3>Stage 2 data mixture</h3><span class="sub">share of 4.7M samples</span></div>
+          <div class="mix" role="table" aria-label="Stage 2 data mixture by task">
+            <span class="lbl">Grounding</span><div class="track"><div class="fill" style="width:100%"></div></div><span class="pct">30.4%</span>
+            <span class="lbl">General VQA</span><div class="track"><div class="fill" style="width:64.8%"></div></div><span class="pct">19.7%</span>
+            <span class="lbl">Naive OCR</span><div class="track"><div class="fill" style="width:38.8%"></div></div><span class="pct">11.8%</span>
+            <span class="lbl">Text IF</span><div class="track"><div class="fill" style="width:31.6%"></div></div><span class="pct">9.6%</span>
+            <span class="lbl">Chart &amp; Table</span><div class="track"><div class="fill" style="width:23.4%"></div></div><span class="pct">7.1%</span>
+            <span class="lbl">Captioning</span><div class="track"><div class="fill" style="width:22.0%"></div></div><span class="pct">6.7%</span>
+            <span class="lbl">OCR QA</span><div class="track"><div class="fill" style="width:19.4%"></div></div><span class="pct">5.9%</span>
+            <span class="lbl">Code Reasoning</span><div class="track"><div class="fill" style="width:12.2%"></div></div><span class="pct">3.7%</span>
+            <span class="lbl">Mathematics</span><div class="track"><div class="fill" style="width:7.6%"></div></div><span class="pct">2.3%</span>
+            <span class="lbl">Culture</span><div class="track"><div class="fill" style="width:5.9%"></div></div><span class="pct">1.8%</span>
+            <span class="lbl">Doc. Understanding</span><div class="track"><div class="fill" style="width:3.0%"></div></div><span class="pct">0.9%</span>
+            <span class="lbl">Science</span><div class="track"><div class="fill" style="width:0.6%"></div></div><span class="pct">0.1%</span>
+          </div>
+        </div>
+      </div>
+
+      <figure>
+        <img src="static/img/amalia-vl/synthetic-data.jpg" alt="Samples from SimpleCodeOCR, SePIC, InfographicSynth, PT-VQA-Gen and PT-OCR." loading="lazy">
+        <figcaption><span class="label">Fig. 2.</span> Samples from several of our pt-PT focused synthetic datasets.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ============ RESULTS ============ -->
+  <section id="results" class="alt">
+    <div class="container">
+      <h2>Results</h2>
+      <p>We evaluate 17 LVLMs across the openness spectrum in pt-PT, on 18 benchmarks covering general VQA, OCR and document understanding, charts and diagrams, spatial understanding, captioning and mathematics. The benchmarks were machine-translated with Gemini-3.1-Pro and validated through manual assessment. All models follow a unified lmms-eval protocol, with instruct variants, thinking disabled and temperature 0.</p>
+
+      <div class="chart" data-bar-chart>
+        <div class="chart-head"><h3>Average pt-PT score across 18 benchmarks</h3><span class="sub">hover a bar for details</span></div>
+        <div class="chart-body"></div>
+        <!--VL_CHART--><script type="application/json">{"metric": "pt-PT average", "max": 70, "ticks": [0, 10, 20, 30, 40, 50, 60, 70], "series": {"open_weights": {"label": "Open weights", "color": "#5b6cb8"}, "open_data": {"label": "Open weights + open vision data", "color": "#2a9d8f"}, "fully_open": {"label": "Fully open (weights, vision data & LLM)", "color": "#eb6a3f"}}, "rows": [{"name": "Ministral-3-8B", "value": 48.6, "series": "open_weights"}, {"name": "Gemma-3-12B", "value": 50.2, "series": "open_weights"}, {"name": "GLM-4.6V-Flash", "value": 55.6, "series": "open_weights"}, {"name": "MiniCPM-V4", "value": 57.4, "series": "open_weights"}, {"name": "Qwen3-VL-8B", "value": 57.9, "series": "open_weights"}, {"name": "InternVL3.5-8B", "value": 58.6, "series": "open_weights"}, {"name": "Nemotron-Nano-12B", "value": 60.0, "series": "open_weights"}, {"name": "Qwen3.5-9B", "value": 65.2, "series": "open_weights"}, {"name": "EuroVLM-9B", "value": 41.3, "series": "open_weights", "note": "open LLM, closed vision data"}, {"name": "TowerVision-9B", "value": 42.5, "series": "open_data"}, {"name": "Molmo2-8B", "value": 50.8, "series": "open_data"}, {"name": "LLaVA-OV1.5-8B", "value": 60.9, "series": "open_data"}, {"name": "Salamandra-VL-7B", "value": 19.8, "series": "fully_open"}, {"name": "Molmo2-O-7B", "value": 43.9, "series": "fully_open"}, {"name": "Perception-LM-8B", "value": 47.6, "series": "fully_open"}, {"name": "AMALIA-VL", "value": 54.5, "series": "fully_open", "ours": true}, {"name": "AMALIA-VL-DPO", "value": 55.1, "series": "fully_open", "ours": true}]}</script><!--/VL_CHART-->
+      </div>
+
+      <div class="results-cols">
+        <div>
+          <h3>Strengths</h3>
+          <ul class="findings">
+            <li><strong>Strongest fully open model.</strong> AMALIA-VL-DPO averages 55.1, ahead of the next best fully open model, Perception-LM-8B (47.6), and is top scoring in 13 out of 18 benchmarks among open-source models.</li>
+            <li><strong>Captioning.</strong> Its strongest task type, with the best overall score on COCO (50.8, next best 36.5). Captioning requires syntactically correct long-form pt-PT, where the advantage of other models dwindles.</li>
+            <li><strong>Spatial grounding.</strong> AMALIA-VL-DPO reaches 79.2 on RefCOCO and adapts to different bounding box formats, while most models fail to follow the format requested in pt-PT. DPO adds over 3 points on EmbSpatial.</li>
+            <li><strong>OCR.</strong> Together with captioning and spatial grounding, AMALIA-VL is best in class in 5 out of 8 benchmarks. DPO improves all four OCR benchmarks through better response style and format compliance.</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Open challenges</h3>
+          <ul class="findings">
+            <li><strong>General VQA.</strong> AMALIA-VL is the best fully open model in 6 out of 7 benchmarks, but this is also where the gap to open-weights models is largest, bounded by the availability of licensable broad world-knowledge training data.</li>
+            <li><strong>Complex reasoning.</strong> MathVision and MMStar remain difficult, which we attribute to the lack of long-form pt-PT reasoning data in the training mix.</li>
+            <li><strong>European is not European Portuguese.</strong> The European-centric TowerVision (42.5) and EuroVLM (41.3) show no advantage over similarly open peers. General European language support does not translate into robust pt-PT performance.</li>
+          </ul>
+        </div>
+      </div>
+
+      <details class="more">
+        <summary>Full results (Table 3)</summary>
+        <div class="table-block">
+          <div class="caption"><span class="label">Table 3.</span> Results on pt-PT tasks across core V&amp;L tasks: VQA, OCR, Diagram and Spatial understanding, Captioning and Math.</div>
+          <div class="table-wrap breakout"><!--VL_TABLE--><table class="paper compact">
+<thead><tr class="group"><th></th>
+<th colspan="7"><span>General VQA</span></th>
+<th colspan="4"><span>OCR &amp; Document</span></th>
+<th colspan="2"><span>Chart &amp; Diagram</span></th>
+<th colspan="2"><span>Spatial</span></th>
+<th colspan="2"><span>Caption</span></th>
+<th colspan="1"><span>Math</span></th>
+<th colspan="1"></th>
+</tr><tr><th>Model</th>
+<th class="sep">MME<sup>†</sup></th>
+<th class="">MMMU<sup>†</sup></th>
+<th class="">MMStar<sup>†</sup></th>
+<th class="">MMPro</th>
+<th class="">SEED<sup>†</sup></th>
+<th class="">POPE<sup>†</sup></th>
+<th class="">RWQA</th>
+<th class="sep">OCR</th>
+<th class="">TxtVQA<sup>†</sup></th>
+<th class="">DocVQA<sup>†</sup></th>
+<th class="">InfoVQA<sup>†</sup></th>
+<th class="sep">AI2D</th>
+<th class="">ChartQA</th>
+<th class="sep">EmbSp</th>
+<th class="">RefRec</th>
+<th class="sep">COCO<sup>†</sup></th>
+<th class="">RefCap</th>
+<th class="sep">MVision<sup>†</sup></th>
+<th class="sep">Average</th>
+</tr></thead><tbody>
+<tr class=""><td>Ministral-3-8B<span class="glyph">◇</span></td>
+<td class="sep">1756</td>
+<td class="">45.4</td>
+<td class="">45.3</td>
+<td class="">26.8</td>
+<td class="">70.3</td>
+<td class="">77.1</td>
+<td class="">56.2</td>
+<td class="sep">61.7</td>
+<td class="">52.8</td>
+<td class="">70.0</td>
+<td class="">52.7</td>
+<td class="sep">71.9</td>
+<td class="">49.5</td>
+<td class="sep">49.2</td>
+<td class="">26.9</td>
+<td class="sep">22.4</td>
+<td class="">4.0</td>
+<td class="sep">29.5</td>
+<td class="sep">48.6</td>
+</tr>
+<tr class=""><td>Gemma-3-12B<span class="glyph">◇</span></td>
+<td class="sep">2120</td>
+<td class="">47.8</td>
+<td class="">51.4</td>
+<td class="">32.1</td>
+<td class="">70.5</td>
+<td class="">85.1</td>
+<td class="">49.4</td>
+<td class="sep">62.7</td>
+<td class="">61.2</td>
+<td class="">67.8</td>
+<td class="">42.8</td>
+<td class="sep">75.9</td>
+<td class="">54.2</td>
+<td class="sep">55.7</td>
+<td class="">6.1</td>
+<td class="sep">26.7</td>
+<td class="">5.8</td>
+<td class="sep">32.4</td>
+<td class="sep">50.2</td>
+</tr>
+<tr class=""><td>GLM-4.6V-Flash<span class="glyph">◇</span></td>
+<td class="sep">2294</td>
+<td class="">48.6</td>
+<td class="">60.7</td>
+<td class="">36.9</td>
+<td class="">77.1</td>
+<td class="">86.8</td>
+<td class="">66.8</td>
+<td class="sep">76.2</td>
+<td class="">69.9</td>
+<td class="">66.0</td>
+<td class="">5.7</td>
+<td class="sep">80.6</td>
+<td class="">42.8</td>
+<td class="sep">70.6</td>
+<td class="best">86.9</td>
+<td class="sep">25.8</td>
+<td class="">9.8</td>
+<td class="sep">7.8</td>
+<td class="sep">55.6</td>
+</tr>
+<tr class=""><td>MiniCPM-V4<span class="glyph">◇</span></td>
+<td class="sep">2274</td>
+<td class="">44.9</td>
+<td class="">60.4</td>
+<td class="">27.9</td>
+<td class="">76.8</td>
+<td class="">85.7</td>
+<td class="">66.6</td>
+<td class="sep">72.4</td>
+<td class="">65.1</td>
+<td class="">70.0</td>
+<td class="">59.8</td>
+<td class="sep">79.0</td>
+<td class="">74.5</td>
+<td class="sep">66.2</td>
+<td class="">45.1</td>
+<td class="sep">32.0</td>
+<td class="">6.0</td>
+<td class="sep">19.1</td>
+<td class="sep">57.4</td>
+</tr>
+<tr class=""><td>Qwen3-VL-8B<span class="glyph">◇</span></td>
+<td class="sep best">2355</td>
+<td class="">51.3</td>
+<td class="">60.8</td>
+<td class="">37.2</td>
+<td class="">78.1</td>
+<td class="">85.5</td>
+<td class="">68.2</td>
+<td class="sep">75.7</td>
+<td class="">67.7</td>
+<td class="">70.9</td>
+<td class="">66.0</td>
+<td class="sep">80.7</td>
+<td class="">75.5</td>
+<td class="sep best">73.9</td>
+<td class="">0.2</td>
+<td class="sep">30.4</td>
+<td class="">12.2</td>
+<td class="sep">24.4</td>
+<td class="sep">57.9</td>
+</tr>
+<tr class=""><td>InternVL3.5-8B<span class="glyph">◇</span></td>
+<td class="sep">2217</td>
+<td class="best">53.7</td>
+<td class="">62.4</td>
+<td class="best">38.0</td>
+<td class="">76.2</td>
+<td class="">86.3</td>
+<td class="">62.9</td>
+<td class="sep">72.6</td>
+<td class="">62.3</td>
+<td class="">66.4</td>
+<td class="">58.4</td>
+<td class="sep">79.0</td>
+<td class="">74.8</td>
+<td class="sep">69.9</td>
+<td class="">39.2</td>
+<td class="sep">29.9</td>
+<td class="">5.6</td>
+<td class="sep">38.1</td>
+<td class="sep">58.6</td>
+</tr>
+<tr class=""><td>Nemotron-Nano-12B<span class="glyph">◇</span></td>
+<td class="sep">2004</td>
+<td class="">50.7</td>
+<td class="">59.9</td>
+<td class="">36.3</td>
+<td class="">77.9</td>
+<td class="">85.2</td>
+<td class="">69.9</td>
+<td class="sep best">80.2</td>
+<td class="">69.0</td>
+<td class="">69.7</td>
+<td class="">64.9</td>
+<td class="sep best">83.9</td>
+<td class="">78.6</td>
+<td class="sep">64.7</td>
+<td class="">62.3</td>
+<td class="sep">18.8</td>
+<td class="">2.9</td>
+<td class="sep">33.1</td>
+<td class="sep">60.0</td>
+</tr>
+<tr class=""><td>Qwen3.5-9B<span class="glyph">◇</span></td>
+<td class="sep">2226</td>
+<td class="">52.2</td>
+<td class="">57.6</td>
+<td class="">36.7</td>
+<td class="best">78.5</td>
+<td class="">84.7</td>
+<td class="best">74.6</td>
+<td class="sep">71.7</td>
+<td class="best">70.8</td>
+<td class="best">76.3</td>
+<td class="best">71.6</td>
+<td class="sep">83.5</td>
+<td class="best">80.3</td>
+<td class="sep">69.3</td>
+<td class="">83.6</td>
+<td class="sep">33.7</td>
+<td class="best">13.5</td>
+<td class="sep best">54.4</td>
+<td class="sep best">65.2</td>
+</tr>
+<tr class="rule"><td>EuroVLM-9B<span class="glyph">◇♣</span></td>
+<td class="sep">1581</td>
+<td class="">34.0</td>
+<td class="">40.3</td>
+<td class="">19.8</td>
+<td class="">66.8</td>
+<td class="">84.2</td>
+<td class="">55.2</td>
+<td class="sep">46.4</td>
+<td class="">54.1</td>
+<td class="">56.4</td>
+<td class="">34.0</td>
+<td class="sep">61.5</td>
+<td class="">47.6</td>
+<td class="sep">38.8</td>
+<td class="">5.1</td>
+<td class="sep">23.9</td>
+<td class="">5.3</td>
+<td class="sep">12.9</td>
+<td class="sep">41.3</td>
+</tr>
+<tr class=""><td>TowerVision-9B<span class="glyph">◇♡</span></td>
+<td class="sep">1414</td>
+<td class="">39.1</td>
+<td class="">41.9</td>
+<td class="">21.7</td>
+<td class="">70.8</td>
+<td class="">85.1</td>
+<td class="">49.9</td>
+<td class="sep">47.5</td>
+<td class="">58.3</td>
+<td class="">56.1</td>
+<td class="">38.3</td>
+<td class="sep">65.0</td>
+<td class="">39.2</td>
+<td class="sep">49.1</td>
+<td class="">8.3</td>
+<td class="sep">24.4</td>
+<td class="">4.9</td>
+<td class="sep">14.6</td>
+<td class="sep">42.5</td>
+</tr>
+<tr class=""><td>Molmo2-8B<span class="glyph">◇♡</span></td>
+<td class="sep">1936</td>
+<td class="">52.7</td>
+<td class="">61.2</td>
+<td class="">36.4</td>
+<td class="">73.0</td>
+<td class="">87.2</td>
+<td class="">66.8</td>
+<td class="sep">59.0</td>
+<td class="">61.2</td>
+<td class="">62.8</td>
+<td class="">50.2</td>
+<td class="sep">80.9</td>
+<td class="">43.5</td>
+<td class="sep">62.1</td>
+<td class="">3.6</td>
+<td class="sep">19.5</td>
+<td class="">3.8</td>
+<td class="sep">22.4</td>
+<td class="sep">50.8</td>
+</tr>
+<tr class=""><td>LLaVA-OV1.5-8B<span class="glyph">◇♡</span></td>
+<td class="sep">2244</td>
+<td class="">52.9</td>
+<td class="best">64.7</td>
+<td class="">36.9</td>
+<td class="">75.8</td>
+<td class="">86.4</td>
+<td class="">62.9</td>
+<td class="sep">76.1</td>
+<td class="">63.3</td>
+<td class="">72.0</td>
+<td class="">62.6</td>
+<td class="sep">81.6</td>
+<td class="">74.2</td>
+<td class="sep">60.2</td>
+<td class="">78.1</td>
+<td class="sep">36.5</td>
+<td class="">8.2</td>
+<td class="sep">23.1</td>
+<td class="sep">60.9</td>
+</tr>
+<tr class="rule"><td>Salamandra-VL-7B<span class="glyph">◇♡♣</span></td>
+<td class="sep">784</td>
+<td class="">27.7</td>
+<td class="">32.0</td>
+<td class="">11.8</td>
+<td class="">33.3</td>
+<td class="">64.9</td>
+<td class="">19.7</td>
+<td class="sep">21.0</td>
+<td class="">1.6</td>
+<td class="">6.0</td>
+<td class="">8.7</td>
+<td class="sep">30.1</td>
+<td class="">14.0</td>
+<td class="sep">26.3</td>
+<td class="">0.0</td>
+<td class="sep">19.7</td>
+<td class="">8.2</td>
+<td class="sep">3.1</td>
+<td class="sep">19.8</td>
+</tr>
+<tr class=""><td>Molmo2-O-7B<span class="glyph">◇♡♣</span></td>
+<td class="sep">1618</td>
+<td class="">37.8</td>
+<td class="">52.6</td>
+<td class="">26.5</td>
+<td class="">70.0</td>
+<td class="">81.5</td>
+<td class="">58.3</td>
+<td class="sep">57.4</td>
+<td class="">55.1</td>
+<td class="">52.7</td>
+<td class="">41.6</td>
+<td class="sep">66.4</td>
+<td class="">40.4</td>
+<td class="sep">54.7</td>
+<td class="">3.4</td>
+<td class="sep">18.4</td>
+<td class="">4.7</td>
+<td class="sep">11.8</td>
+<td class="sep">43.9</td>
+</tr>
+<tr class=""><td>Perception-LM-8B<span class="glyph">◇♡♣</span></td>
+<td class="sep">1368</td>
+<td class="">37.7</td>
+<td class="second">52.8</td>
+<td class="">22.9</td>
+<td class="">73.0</td>
+<td class="">82.8</td>
+<td class="">53.4</td>
+<td class="sep second">76.5</td>
+<td class="">60.8</td>
+<td class="">65.4</td>
+<td class="second">60.3</td>
+<td class="sep">67.6</td>
+<td class="second">69.2</td>
+<td class="sep second">62.2</td>
+<td class="">0.0</td>
+<td class="sep">15.2</td>
+<td class="">3.1</td>
+<td class="sep">4.7</td>
+<td class="sep">47.6</td>
+</tr>
+<tr class="ours"><td>AMALIA-VL<span class="glyph">◇♡♣</span></td>
+<td class="sep">1815</td>
+<td class="">40.0</td>
+<td class="">44.7</td>
+<td class="second">27.9</td>
+<td class="">72.0</td>
+<td class="best second">89.3</td>
+<td class="second">60.9</td>
+<td class="sep">59.0</td>
+<td class="">66.2</td>
+<td class="">68.7</td>
+<td class="">45.0</td>
+<td class="sep">68.4</td>
+<td class="">67.8</td>
+<td class="sep">53.7</td>
+<td class="">77.4</td>
+<td class="sep best second">50.8</td>
+<td class="second">11.2</td>
+<td class="sep">12.2</td>
+<td class="sep">54.5</td>
+</tr>
+<tr class="ours"><td>AMALIA-VL-DPO<span class="glyph">◇♡♣</span></td>
+<td class="sep second">1824</td>
+<td class="second">40.3</td>
+<td class="">44.0</td>
+<td class="">27.1</td>
+<td class="second">73.8</td>
+<td class="">89.1</td>
+<td class="">59.9</td>
+<td class="sep">62.4</td>
+<td class="second">68.0</td>
+<td class="second">69.5</td>
+<td class="">45.6</td>
+<td class="sep second">69.3</td>
+<td class="">66.5</td>
+<td class="sep">57.0</td>
+<td class="second">79.2</td>
+<td class="sep">49.7</td>
+<td class="">10.7</td>
+<td class="sep second">14.0</td>
+<td class="sep second">55.1</td>
+</tr>
+</tbody></table><!--/VL_TABLE--></div>
+          <div class="note">† denotes held-in benchmarks. ◇ Open weights; ♡ Fully open vision data; ♣ Fully open LLM. <strong>Bold</strong> = best overall, <u>underline</u> = best fully open (◇♡♣).</div>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- ============ RESOURCES ============ -->
+  <section id="resources">
+    <div class="container">
+      <h2>Open Release</h2>
+      <ul class="links">
+        <li><a href="https://huggingface.co/amalia-llm/AMALIA-VL-DPO">AMALIA-VL-DPO</a><span>final model</span></li>
+        <li><a href="https://huggingface.co/amalia-llm/AMALIA-VL-SFT">AMALIA-VL-SFT</a><span>Stage 2 model</span></li>
+        <li><a href="https://huggingface.co/datasets/amalia-llm/AMALIA-VL-SFT-Dataset">AMALIA-VL-SFT-Dataset</a><span>Stage 2 data</span></li>
+        <li><a href="https://huggingface.co/datasets/amalia-llm/AMALIA-VL-DPO-Dataset">AMALIA-VL-DPO-Dataset</a><span>Stage 3 data</span></li>
+        <li><a href="https://huggingface.co/collections/amalia-llm/amalia-vl-eval-69d7c3cc5b1993b10eed21b1">AMALIA VL Eval</a><span>pt-PT benchmarks</span></li>
+        <li><a href="https://github.com/AMALIA-LLM/amalia-vl-sft">amalia-vl-sft</a><span>SFT code</span></li>
+        <li><a href="https://github.com/AMALIA-LLM/amalia-vl-dpo">amalia-vl-dpo</a><span>DPO code</span></li>
+        <li><a href="https://github.com/AMALIA-LLM/amalia-vl-eval">amalia-vl-eval</a><span>evaluation code</span></li>
+        <li><a href="https://huggingface.co/datasets/amalia-llm/CARAVELA">CARAVELA</a><span>cultural data</span></li>
+        <li><a href="portexto/">PorTEXTO</a><span>pt-PT OCR benchmark</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ BIBTEX ============ -->
+  <section id="bibtex" class="alt">
+    <div class="container">
+      <h2>BibTeX</h2>
+      <div class="bibtex">
+        <button class="copy" type="button">Copy</button>
+<pre>@article{gloriasilva2026amaliavl,
+  title   = {{AMALIA-VL}: A Native European Portuguese Open-Source Vision and Language Model},
+  author  = {Gl{\'o}ria-Silva, Diogo and Cardeira, Jo{\~a}o and Letras da Luz, Manuel and
+             Simpl{\'i}cio, Afonso and Vinagre, Gon{\c{c}}alo and Tavares, Diogo and
+             Ferreira, Rafael and Calvo, In{\^e}s and Vieira, In{\^e}s and
+             Semedo, David and Magalh{\~a}es, Jo{\~a}o},
+  journal = {arXiv preprint arXiv:2606.19100},
+  year    = {2026}
+}</pre>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <p>This work was supported by the AMALIA project under Measure RE-C05-i08 of the Portuguese national “Programa de Recuperação e Resiliência”, by Fundação para a Ciência e Tecnologia (FCT) and the NOVA LINCS project (UID/04516/2025). We thank the Barcelona Supercomputing Center (BSC) for the computational resources.</p>
+    <div class="funders">
+      <img src="static/img/funder-prr.png" alt="PRR – Plano de Recuperação e Resiliência">
+      <img src="static/img/funder-republica.png" alt="República Portuguesa">
+      <img src="static/img/funder-eu.png" alt="Financiado pela União Europeia – NextGenerationEU">
+    </div>
+  </div>
+</footer>
+
+<script src="static/js/main.js"></script>
+</body>
+</html>

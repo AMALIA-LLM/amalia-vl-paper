@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PorTEXTO: A European Portuguese Benchmark for Visual Text Extraction</title>
+  <meta name="description" content="PorTEXTO is the first benchmark for contemporary and culturally relevant European Portuguese (pt-PT) visual text extraction.">
+  <meta property="og:title" content="PorTEXTO: A European Portuguese Benchmark for Visual Text Extraction">
+  <meta property="og:description" content="The first benchmark for contemporary and culturally relevant pt-PT visual text extraction.">
+  <meta property="og:image" content="../static/img/portexto/teaser.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="../static/img/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../static/css/style.css">
+</head>
+<body>
+<!--ICONS--><svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<symbol id="i-gh" viewBox="0 0 16 16"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></symbol>
+<symbol id="i-paper" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></g></symbol>
+<symbol id="i-data" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></g></symbol>
+<symbol id="i-bench" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></g></symbol>
+</svg><!--/ICONS-->
+
+<header class="topbar">
+  <div class="container">
+    <a class="brand" href="https://amaliallm.pt" aria-label="AMALIA project website"><img src="../static/img/amalia-logo.png" alt="AMALIA"></a>
+    <nav>
+      <a href="../">AMALIA-VL</a>
+      <a href="./" class="active">PorTEXTO</a>
+      <a href="https://amaliallm.pt" class="ext">amaliallm.pt</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="container">
+      <h1><span class="accent">PorTEXTO</span><span class="subtitle">A European Portuguese Benchmark for Visual Text Extraction</span></h1>
+
+      <p class="authors">
+        <span>João Cardeira<sup>1,2</sup></span>
+        <span>Diogo Glória-Silva<sup>1,2</sup></span>
+        <span>Manuel Letras da Luz<sup>1,2</sup></span>
+        <span>Rafael Ferreira<sup>1,2</sup></span>
+        <span>Diogo Tavares<sup>1,2</sup></span>
+        <span>David Semedo<sup>1,2</sup></span>
+        <span>João Magalhães<sup>1,2</sup></span>
+      </p>
+      <p class="affils"><span><sup>1</sup> NOVA School of Science and Technology</span><span><sup>2</sup> NOVA LINCS</span></p>
+      <p class="contact">Correspondence: <a href="mailto:jaca.pereira@campus.fct.unl.pt">jaca.pereira@campus.fct.unl.pt</a></p>
+
+      <div class="buttons">
+        <a class="btn" href="https://arxiv.org/abs/2606.19096"><svg><use href="#i-paper"/></svg> Paper</a>
+        <a class="btn" href="https://github.com/AMALIA-LLM/amalia-vl-eval"><svg><use href="#i-gh"/></svg> Code</a>
+        <a class="btn" href="https://huggingface.co/datasets/amalia-llm/PorTEXTO"><span class="emoji">🤗</span> Dataset</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="teaser">
+    <div class="container wide">
+      <figure style="margin:0">
+        <img src="../static/img/portexto/teaser.jpg" alt="Two chat examples: checking a handwritten logic exam in pt-PT, and transcribing a handwritten shopping list from a photo.">
+        <figcaption><span class="label">Fig. 1:</span> <span class="title">Modern OCR applications.</span> Contemporary OCR applications range from professional settings, such as automatic document processing, to casual and educational purposes, often involving user dialogue with an AI chat.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ============ ABSTRACT ============ -->
+  <section id="abstract">
+    <div class="container">
+      <h2>Abstract</h2>
+      <p>European Portuguese (pt-PT) is largely absent from Optical Character Recognition (OCR) benchmarks, which skew toward high-resource languages. The few benchmarks that cover pt-PT focus on historical artifacts and literature. This work addresses modern OCR applications, introducing <strong>PorTEXTO</strong>, the first benchmark for contemporary and culturally relevant pt-PT visual text extraction. To ascertain quality, we employ an annotation pipeline combining transcriptions from a frontier LVLM with exhaustive review by native speakers. We observe a sharp performance drop from synthetic to real world samples in most models, and find that, currently, specialized multilingual data is a better driver for pt-PT performance than model size or resolution budget, motivating the release of open pt-PT OCR resources.</p>
+
+      <div class="stats">
+        <div class="stat"><div class="value">817</div><div class="label">curated samples</div></div>
+        <div class="stat"><div class="value">68,409</div><div class="label">words of contemporary pt-PT</div></div>
+        <div class="stat"><div class="value">3</div><div class="label">complementary sources</div></div>
+        <div class="stat"><div class="value">17</div><div class="label">native pt-PT reviewers</div></div>
+        <div class="stat"><div class="value">18</div><div class="label">models evaluated</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DATA ============ -->
+  <section id="data" class="alt">
+    <div class="container">
+      <h2>Contemporary and Culturally Relevant Data</h2>
+      <p>PorTEXTO covers the modern visual and linguistic contexts in which pt-PT text appears in practice, with samples from three complementary sources. Real-world data was collected through the voluntary effort of contributors and curated by native pt-PT speakers.</p>
+
+      <div data-tabs>
+        <div class="tabs" role="tablist">
+          <button class="tab" role="tab" aria-selected="true" aria-controls="tab-hw" id="t-hw">Handwritten<span class="count">472</span></button>
+          <button class="tab" role="tab" aria-selected="false" aria-controls="tab-itw" id="t-itw">In-The-Wild<span class="count">145</span></button>
+          <button class="tab" role="tab" aria-selected="false" aria-controls="tab-syn" id="t-syn">Synthetic<span class="count">200</span></button>
+        </div>
+        <div class="tab-panel" id="tab-hw" role="tabpanel" aria-labelledby="t-hw">
+          <figure>
+            <img src="../static/img/portexto/handwritten.jpg" alt="Handwritten study notes in pt-PT: full scanned pages and cropped regions." loading="lazy">
+            <figcaption><span class="label">Fig. 2:</span> <span class="title">Handwritten Subsets.</span> Day-to-day, high-school and college-level notes, as Full Page (121) and Region (351) samples, exposing models to authentic handwriting, idiosyncratic pt-PT abbreviations and everyday orthography.</figcaption>
+          </figure>
+          <ul class="facts">
+            <li><b>Content</b>grocery lists and personal notes to engineering and social sciences study notes</li>
+            <li><b>Capture</b>A4 pages scanned at 200 dpi and rasterized to one high-resolution image per page</li>
+            <li><b>Regions</b>pages split into their main logical content blocks, in natural reading order</li>
+          </ul>
+        </div>
+        <div class="tab-panel" id="tab-itw" role="tabpanel" aria-labelledby="t-itw" hidden>
+          <figure>
+            <img src="../static/img/portexto/in-the-wild.jpg" alt="In-the-wild pt-PT images: a national exam, a government form, shop fronts, a sports club sign, a TV meme and a festival poster." loading="lazy">
+            <figcaption><span class="label">Fig. 3:</span> <span class="title">In-The-Wild Subset.</span> School exams, invoices and government forms, as well as photographs of coffee shops, town signs, sports clubs, TV shows and memes, across a challenging range of resolutions and aspect ratios.</figcaption>
+          </figure>
+          <ul class="facts">
+            <li><b>Casual</b>town signs, building names, festivity posters, restaurant menus, memes</li>
+            <li><b>Professional</b>exams, documents, government forms and invoices</li>
+            <li><b>Conditions</b>variable noise, lighting, perspectives and fonts, in both photographs and screenshots</li>
+          </ul>
+        </div>
+        <div class="tab-panel" id="tab-syn" role="tabpanel" aria-labelledby="t-syn" hidden>
+          <figure>
+            <img src="../static/img/portexto/synthetic.jpg" alt="Synthetic pt-PT documents rendered over photographs." loading="lazy">
+            <figcaption><span class="label">Fig. 4:</span> <span class="title">Synthetic Subset.</span> Pure pt-PT text in common document layouts, rendered on top of general purpose images, more likely to be aligned with the training data distribution of most models.</figcaption>
+          </figure>
+          <ul class="facts">
+            <li><b>Text</b>pt-PT Wikipedia and European Parliament transcripts</li>
+            <li><b>Rendering</b>SynthDoG layouts (slides, tables of contents, multi-section pages) over Open Images backgrounds</li>
+            <li><b>Fonts</b>diverse open-source, Portuguese-compatible fonts, with colour adapted per word for contrast</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ANNOTATION ============ -->
+  <section id="annotation">
+    <div class="container">
+      <h2>Annotation Pipeline</h2>
+      <p>Transcriptions from a frontier LVLM are exhaustively reviewed by native pt-PT speakers, before and after transcription.</p>
+
+      <div class="stages">
+        <div>
+          <span class="n">Step 1</span>
+          <h3>Review &amp; Clean</h3>
+          <p>Reviewers discard unreadable samples and redact the regions they cannot read.</p>
+          <span class="meta">236 discarded · 175 redacted</span>
+        </div>
+        <div>
+          <span class="n">Step 2</span>
+          <h3>Transcribe</h3>
+          <p>Gemini 3.1 Pro transcribes each image, preserving spatial layout.</p>
+          <span class="meta">pages also split into regions</span>
+        </div>
+        <div>
+          <span class="n">Step 3</span>
+          <h3>Verify</h3>
+          <p>A second reviewer validates, corrects, or discards each transcription.</p>
+          <span class="meta">135 corrected · 20 discarded</span>
+        </div>
+      </div>
+
+      <div class="fig-grid">
+        <figure>
+          <img src="../static/img/portexto/annotation-platform.jpg" alt="Annotation interface with the image, redaction tool, editable transcription and validate or invalidate buttons." loading="lazy">
+          <figcaption><span class="label">Fig. 5:</span> The platform used for annotation.</figcaption>
+        </figure>
+        <figure>
+          <img src="../static/img/portexto/statistics.png" alt="Violin plots of words per sample by subset, and a scatter plot of image width versus height." loading="lazy">
+          <figcaption><span class="label">Fig. 6:</span> Distributions of transcription length and source image resolution.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ RESULTS ============ -->
+  <section id="results" class="alt">
+    <div class="container">
+      <h2>Results</h2>
+      <p>We evaluate 18 models with lmms-eval: 2 OCR-specific models, 13 first-tier LVLMs (up to 12B parameters) and 3 second-tier LVLMs (27B to 38B). Models keep their default configurations, with temperature 0 and thinking disabled. We report ANLS, which measures character-level similarity to the reference, and BLEU-1, which rewards correct words and is robust to different reading orders.</p>
+
+      <div class="table-block">
+        <div class="caption"><span class="label">Table 2:</span> Performance on PorTEXTO across subsets (0–100). R and FP denote the Region and Full Page Handwritten subsets. Best and second-best per column are highlighted.</div>
+        <div class="table-wrap breakout"><!--PT_TABLE--><table class="paper">
+<thead><tr class="group"><th></th>
+<th colspan="2"><span>Handwritten (R)</span></th>
+<th colspan="2"><span>Handwritten (FP)</span></th>
+<th colspan="2"><span>Synthetic</span></th>
+<th colspan="2"><span>In-The-Wild</span></th>
+<th colspan="2"><span>Mean</span></th>
+</tr><tr><th>Model</th>
+<th class="sep">ANLS</th>
+<th class="">BLEU-1</th>
+<th class="sep">ANLS</th>
+<th class="">BLEU-1</th>
+<th class="sep">ANLS</th>
+<th class="">BLEU-1</th>
+<th class="sep">ANLS</th>
+<th class="">BLEU-1</th>
+<th class="sep">ANLS</th>
+<th class="">BLEU-1</th>
+</tr></thead><tbody>
+<tr class="tier"><td colspan="11">OCR-Specific</td></tr>
+<tr><td>Nemotron-OCR-V2</td><td class="sep">15.6</td><td class="">9.6</td><td class="sep">11.2</td><td class="">9.5</td><td class="sep">91.4</td><td class="">81.0</td><td class="sep">75.9</td><td class="">68.8</td><td class="sep">48.5</td><td class="">42.2</td></tr>
+<tr><td>DeepSeek-OCR-2-3B</td><td class="sep">36.1</td><td class="">30.2</td><td class="sep">18.7</td><td class="">23.3</td><td class="sep">91.4</td><td class="">84.3</td><td class="sep">84.1</td><td class="">75.0</td><td class="sep">57.6</td><td class="">53.2</td></tr>
+<tr class="tier"><td colspan="11">First-tier LVLMs (≤ 12B parameters)</td></tr>
+<tr><td>Molmo2-O-7B</td><td class="sep">26.1</td><td class="">22.1</td><td class="sep">6.6</td><td class="">10.7</td><td class="sep">70.7</td><td class="">61.5</td><td class="sep">56.7</td><td class="">34.8</td><td class="sep">40.0</td><td class="">32.3</td></tr>
+<tr><td>GLM-4.6V-Flash-10B</td><td class="sep">46.5</td><td class="">34.3</td><td class="sep">21.8</td><td class="">19.3</td><td class="sep">56.8</td><td class="">54.1</td><td class="sep">48.3</td><td class="">45.5</td><td class="sep">43.4</td><td class="">38.3</td></tr>
+<tr><td>PerceptionLM-8B</td><td class="sep">36.7</td><td class="">29.9</td><td class="sep">10.1</td><td class="">9.1</td><td class="sep">78.2</td><td class="">71.7</td><td class="sep">59.2</td><td class="">46.0</td><td class="sep">46.1</td><td class="">39.2</td></tr>
+<tr><td>Molmo2-8B</td><td class="sep">35.0</td><td class="">26.8</td><td class="sep">12.4</td><td class="">14.3</td><td class="sep">81.5</td><td class="">66.6</td><td class="sep">70.9</td><td class="">44.0</td><td class="sep">50.0</td><td class="">37.9</td></tr>
+<tr class="ours"><td>AMALIA-VL</td><td class="sep">41.6</td><td class="">32.7</td><td class="sep">28.4</td><td class="">28.0</td><td class="sep">81.3</td><td class="">79.6</td><td class="sep">72.6</td><td class="">60.8</td><td class="sep">56.0</td><td class="">50.3</td></tr>
+<tr><td>InternVL3.5-8B</td><td class="sep">51.6</td><td class="">43.6</td><td class="sep">31.8</td><td class="">34.0</td><td class="sep">75.5</td><td class="">71.6</td><td class="sep">81.0</td><td class="">71.7</td><td class="sep">60.0</td><td class="">55.2</td></tr>
+<tr class="ours"><td>AMALIA-VL-DPO</td><td class="sep">48.2</td><td class="">38.2</td><td class="sep">39.3</td><td class="">37.7</td><td class="sep">83.2</td><td class="">81.5</td><td class="sep">74.8</td><td class="">64.6</td><td class="sep">61.4</td><td class="">55.5</td></tr>
+<tr><td>Bee-RL-8B</td><td class="sep">45.2</td><td class="">37.5</td><td class="sep">27.1</td><td class="">30.7</td><td class="sep">94.6</td><td class="">87.7</td><td class="sep">83.1</td><td class="">79.1</td><td class="sep">62.5</td><td class="">58.8</td></tr>
+<tr><td>Nemotron-Nano-12B-VL-V2</td><td class="sep">53.3</td><td class="">42.3</td><td class="sep">37.5</td><td class="">32.7</td><td class="sep">92.2</td><td class="">90.0</td><td class="sep">76.8</td><td class="">72.9</td><td class="sep">65.0</td><td class="">59.5</td></tr>
+<tr><td>LLaVA-OneVision-1.5-8B</td><td class="sep">61.1</td><td class="">51.4</td><td class="sep">32.6</td><td class="">37.2</td><td class="sep">98.2</td><td class="">93.0</td><td class="sep">77.4</td><td class="">70.9</td><td class="sep">67.3</td><td class="">63.1</td></tr>
+<tr><td>Gemma-4-E4B-it</td><td class="sep">78.2</td><td class="">63.7</td><td class="sep">42.7</td><td class="">38.7</td><td class="sep">95.6</td><td class="">89.1</td><td class="sep">82.7</td><td class="">78.5</td><td class="sep">74.8</td><td class="">67.5</td></tr>
+<tr><td>Ministral3-Instruct-8B</td><td class="sep">74.0</td><td class="">59.9</td><td class="sep">63.9</td><td class="">56.8</td><td class="sep">98.6</td><td class="">96.1</td><td class="sep">71.4</td><td class="">58.9</td><td class="sep">77.0</td><td class="">67.9</td></tr>
+<tr><td>Qwen3.5-9B</td><td class="sep">80.1</td><td class="">70.3</td><td class="sep second">70.0</td><td class="second">64.9</td><td class="sep second">99.8</td><td class="best">99.0</td><td class="sep">85.4</td><td class="">80.9</td><td class="sep">83.8</td><td class="">78.8</td></tr>
+<tr class="tier"><td colspan="11">Second-tier LVLMs (&gt; 12B parameters)</td></tr>
+<tr><td>InternVL3.5-38B</td><td class="sep">56.5</td><td class="">47.7</td><td class="sep">42.6</td><td class="">43.2</td><td class="sep">81.2</td><td class="">76.8</td><td class="sep">75.2</td><td class="">68.2</td><td class="sep">63.9</td><td class="">59.0</td></tr>
+<tr><td>Gemma-4-31B-it</td><td class="sep best">88.0</td><td class="best">79.0</td><td class="sep">65.2</td><td class="">58.8</td><td class="sep">98.3</td><td class="">93.0</td><td class="sep second">89.8</td><td class="best">87.0</td><td class="sep second">85.3</td><td class="second">79.5</td></tr>
+<tr><td>Qwen3.6-27B</td><td class="sep second">81.5</td><td class="second">71.8</td><td class="sep best">75.4</td><td class="best">71.1</td><td class="sep best">99.9</td><td class="second">96.5</td><td class="sep best">90.5</td><td class="second">86.5</td><td class="sep best">86.8</td><td class="best">81.5</td></tr>
+</tbody></table><!--/PT_TABLE--></div>
+      </div>
+
+      <ul class="findings">
+        <li><strong>Sharp drop from synthetic to real-world samples.</strong> 10 of the 18 models exceed 90 ANLS on Synthetic, but scores fall sharply on Handwritten and In-The-Wild. OCR-specific models collapse on handwriting (11.2 and 18.7 ANLS on full pages) while remaining competitive on In-The-Wild inputs.</li>
+        <li><strong>Model size and resolution budget are not the main bottleneck.</strong> Qwen3.5-9B leads the first tier with 83.8 mean ANLS, only 3 points behind the best second-tier model, Qwen3.6-27B (86.8). Gemma-4 models have the lowest resolution budget, yet reach the top-3 and top-2 scores in their tiers.</li>
+        <li><strong>Specialized multilingual data is the main differentiator.</strong> The top performing models are open weights and do not disclose their training data. The fully open Molmo2-O-7B (40.0) and PerceptionLM-8B (46.1) are among the weakest, below both OCR-specific models in mean BLEU-1. AMALIA-VL-DPO (61.4), trained with pt-PT data, is the best fully open model and on par with open data models.</li>
+      </ul>
+
+      <div class="fig-grid">
+        <div>
+          <h3>EN/ZH OCR does not predict pt-PT OCR</h3>
+          <p>Compared with OCRBench, which covers only English and Chinese, we find no discernible relationship with pt-PT scores (R² = 0.21). PerceptionLM-8B and LLaVA-OneVision-1.5-8B are competitive on OCRBench but trail in pt-PT, while AMALIA-VL-DPO has weak EN/ZH performance yet exceeds expectations in pt-PT.</p>
+          <figure>
+            <img src="../static/img/portexto/ocrbench-vs-portexto.png" alt="Scatter plot of OCRBench (English/Chinese) score versus PorTEXTO score, with a weak linear fit." loading="lazy">
+            <figcaption><span class="label">Fig. 7:</span> OCRBench vs. PorTEXTO mean ANLS. The dashed line is the OLS fit (R² = 0.21).</figcaption>
+          </figure>
+        </div>
+        <div>
+          <h3>Reasoning mostly helps</h3>
+          <p>Enabling explicit reasoning raises mean ANLS for 3 of the 4 unified models, by up to +5.4 for Gemma-4-E4B-it. Gains on Handwritten (Region) are positive for all four models, but results are mixed on Handwritten (Full Page) and In-The-Wild.</p>
+          <figure>
+            <img src="../static/img/portexto/reasoning-delta.png" alt="Heatmap of ANLS change when enabling reasoning, per subset, for four models." loading="lazy">
+            <figcaption><span class="label">Fig. 8:</span> Per-subset ΔANLS = (Reasoning − Instruct).</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ RESOURCES ============ -->
+  <section id="resources">
+    <div class="container">
+      <h2>Resources</h2>
+      <ul class="links">
+        <li><a href="https://huggingface.co/datasets/amalia-llm/PorTEXTO">PorTEXTO</a><span>dataset</span></li>
+        <li><a href="https://github.com/AMALIA-LLM/amalia-vl-eval">amalia-vl-eval</a><span>evaluation code</span></li>
+        <li><a href="../">AMALIA-VL</a><span>pt-PT vision and language model</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ BIBTEX ============ -->
+  <section id="bibtex" class="alt">
+    <div class="container">
+      <h2>BibTeX</h2>
+      <div class="bibtex">
+        <button class="copy" type="button">Copy</button>
+<pre>@article{cardeira2026portexto,
+  title   = {{PorTEXTO}: A European Portuguese Benchmark for Visual Text Extraction},
+  author  = {Cardeira, Jo{\~a}o and Gl{\'o}ria-Silva, Diogo and Letras da Luz, Manuel and
+             Ferreira, Rafael and Tavares, Diogo and Semedo, David and Magalh{\~a}es, Jo{\~a}o},
+  journal = {arXiv preprint arXiv:2606.19096},
+  year    = {2026}
+}</pre>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <p>This work was supported by the AMALIA project under Measure RE-C05-i08 of the Portuguese national “Programa de Recuperação e Resiliência”, by Fundação para a Ciência e Tecnologia (FCT) and the NOVA LINCS project (UID/04516/2025). We thank the Barcelona Supercomputing Center (BSC) for the computational resources.</p>
+    <div class="funders">
+      <img src="../static/img/funder-prr.png" alt="PRR – Plano de Recuperação e Resiliência">
+      <img src="../static/img/funder-republica.png" alt="República Portuguesa">
+      <img src="../static/img/funder-eu.png" alt="Financiado pela União Europeia – NextGenerationEU">
+    </div>
+  </div>
+</footer>
+
+<script src="../static/js/main.js"></script>
+</body>
+</html>
